@@ -22,7 +22,7 @@ I've [found](https://github.com/memcachier/examples-django2) the way for create 
 
 ```sh
 curdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-sqlite_db = 'sqlite://localhost/' + curdir + '/../queue.sqlite'
+sqlite_db = 'sqlite://localhost/' + curdir + '/../local_db.sqlite'
 DATABASES = {'default': dj_database_url.config(default=sqlite_db)}
 ```
 these lines help to use sqlite database when local develoment and use PostgerSQL for running on Heroku .

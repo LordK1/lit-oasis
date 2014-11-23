@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import inspect
 import os
 import dj_database_url
 
@@ -40,7 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'article',
-    'bootstrap_toolkit'
+    'bootstrap_toolkit',
+    'south'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -60,12 +62,18 @@ WSGI_APPLICATION = 'lit-oasis.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+curdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+
+sqlite_db = 'sqlite://localhost/' + curdir + '/../lit_oasis_db.sqlite'
+
+DATABASES = {'default': dj_database_url.config(default=sqlite_db)}
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -88,7 +96,8 @@ STATIC_URL = '/static/'
 
 
 # Parse database configuration from $DATABASE_URL
-DATABASES['default'] = dj_database_url.config()
+# DATABASES['default'] = dj_database_url.config()
+# DATABASES = {'default': dj_database_url.config(default='postgres://localhost/lit-oasis')}
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

@@ -12,11 +12,30 @@ Make sure you have Python [installed properly](http://install.python-guide.org).
 ```sh
 $ git clone https://github.com/LordK1/lit-oasis.git
 $ cd lit-oasis
-$ pip install -r requirements.txt
+$ pip install -r requirements.txt --allow-all-external
 $ python manage.py syncdb
 $ foreman start web
 ```
 Your app should now be running on [localhost:5000](http://localhost:5000/).
+
+I've [found](https://github.com/memcachier/examples-django2) the way for create and test local database with sqlite3 , for that in settings.py used these below lines :
+
+```sh
+curdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+sqlite_db = 'sqlite://localhost/' + curdir + '/../queue.sqlite'
+DATABASES = {'default': dj_database_url.config(default=sqlite_db)}
+```
+these lines help to use sqlite database when local develoment and use PostgerSQL for running on Heroku .
+
+Tanks [David Terei](https://github.com/dterei)
+
+and then you can run these command :
+
+```sh
+$ python manage.py syncdb
+$ python manage.py migrate
+$ python manage.py runserver
+```
 
 ## Documentation
 

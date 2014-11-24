@@ -5,3 +5,4 @@ staticfiles
 *.idea
 .idea/*
 *.sqlite
+uploaded_file/*

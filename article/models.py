@@ -2,7 +2,7 @@ from time import time
 from django.db import models
 
 
-def get_upload_file_name(filename):
+def get_upload_file_name(instance, filename):
     return "uploaded_file/%s_%s" % (str(time()).replace(".", "_"), filename)
 
 

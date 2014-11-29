@@ -15,12 +15,23 @@ class Author(models.Model):
         return self.name
 
 
+class Category(models.Model):
+    title = models.CharField(max_length=20, blank=False)
+
+    def get_absolute_url(self):
+        return '/%s/' % self.title
+
+    def __unicode__(self):
+        return self.title
+
+
 class Article(models.Model):
     title = models.CharField(max_length=40)
     content = models.TextField(blank=True)
     publish_date = models.DateTimeField(auto_now_add=True)
     uploaded_file = models.FileField(upload_to=get_upload_file_name, verbose_name="File", blank=True)
     author = models.ManyToManyField(Author)
+    category = models.ManyToManyField(Category)
 
     def __unicode__(self):
         return self.title

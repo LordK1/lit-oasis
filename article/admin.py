@@ -10,7 +10,6 @@ class ArticleAdmin(admin.ModelAdmin):
     filter_horizontal = ('author', 'category')
 
 
-
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('name', 'body', 'publish_date', 'article')
     search_fields = ('name', 'body', 'article')
@@ -33,4 +32,4 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Author, AuthorAdmin)
-admin.site.register(Category , CategoryAdmin)
+admin.site.register(Category, CategoryAdmin)

@@ -36,6 +36,9 @@ class Article(models.Model):
     def __unicode__(self):
         return self.title
 
+    class Meta:
+        ordering = ['publish_date']
+
 
 class Comment(models.Model):
     name = models.CharField(max_length=100)
@@ -44,4 +47,4 @@ class Comment(models.Model):
     article = models.ForeignKey(Article)
 
     def __unicode__(self):
-        return self.name
+        return u'%s' % self.name

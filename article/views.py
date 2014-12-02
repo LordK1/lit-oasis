@@ -1,11 +1,13 @@
 from article.forms import ContactForm
+from article.models import Article, Category
 from django.core.mail import send_mail
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 
 
 def home(request):
-    return render(request, 'home.html', {})
+    articles = Article.objects.all()
+    return render(request, 'home.html', {'articles': articles})
 
 
 def contact(request):

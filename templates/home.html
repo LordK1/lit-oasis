@@ -3,4 +3,21 @@
 {% block title %}
     Home
 {% endblock %}
+{% block header-block %}
+    <!-- List of Articles that were in the Headers Category -->
+    {% if articles %}
+        {% for article in articles %}
+        <div class="col-lg-4">
+            <img class="img-circle img-headers"
+                     src="{{ article.uploaded_file }}"
+                     alt="Generic placeholder image" >
 
+            <h2>{{ article.title }}</h2>
+
+            <p>{{ article.content }}</p>
+
+            <p><a class="btn btn-default" href="#" role="button"> View details &raquo; </a></p>
+        </div>
+    {% endfor %}
+    {% endif %}
+{% endblock %}

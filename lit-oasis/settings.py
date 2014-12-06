@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import inspect
 import os
 import dj_database_url
+from os.path import normpath, join
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -69,9 +70,9 @@ sqlite_db = 'sqlite://localhost/' + curdir + '/../lit_oasis_db.sqlite'
 DATABASES = {'default': dj_database_url.config(default=sqlite_db)}
 
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+# 'default': {
+# 'ENGINE': 'django.db.backends.sqlite3',
+# 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
 
@@ -110,8 +111,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 STATIC_ROOT = 'staticfiles'
 
-STATIC_URL = '/static/'
-
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
@@ -119,3 +118,10 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
+########## MEDIA CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
+MEDIA_URL = '/media/'
+########## END MEDIA CONFIGURATION

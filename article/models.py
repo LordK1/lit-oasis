@@ -1,13 +1,14 @@
 from time import time
+
 from django.db import models
 
 
-def get_upload_file_name(instance, filename):
-    return "media/files/%s_%s" % (str(time()).replace(".", "_"), filename)
+def get_upload_file_name(instance, file_name):
+    return "files/%s" % (str(time()).replace(".", "_"))
 
 
-def get_upload_image_file_name(instance, filename):
-    return "media/images/%s_%s" % (str(time()).replace(".", "_"), filename)
+def get_upload_image_file_name(instance, image_name):
+    return "images/%s" % (str(time()).replace(".", "_"))
 
 
 class Author(models.Model):
@@ -35,7 +36,7 @@ class Article(models.Model):
     publish_date = models.DateTimeField(auto_now_add=True)
     uploaded_file = models.FileField(upload_to=get_upload_file_name, verbose_name="File", blank=True)
     image = models.ImageField(upload_to=get_upload_image_file_name, verbose_name="Image", blank=False)
-    author = models.ManyToManyField(Author)
+    author = models.ManyToManyField(Author, related_name="author")
     category = models.ManyToManyField(Category)
 
     def __unicode__(self):

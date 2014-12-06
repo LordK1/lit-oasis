@@ -7,17 +7,25 @@
     <!-- List of Articles that were in the Headers Category -->
     {% if articles %}
         {% for article in articles %}
-        <div class="col-lg-4">
-            <img class="img-circle img-headers"
-                     src="{{ article.uploaded_file }}"
-                     alt="Generic placeholder image" >
+            <div class="col-lg-4">
+                <img class="img-circle img-headers"
+                     src="{{ article.image.url }}"
+                     alt="Generic placeholder image">
 
-            <h2>{{ article.title }}</h2>
+                <h2>{{ article.title }}</h2>
 
-            <p>{{ article.content }}</p>
+                <p>Authors :
+                    {% for author in article.author.all %}
+                        {{ author }} -
+                        <a href="#" class="btn btn-primary btn-xs">Likes - {{ author.likes }} <span class="glyphicon glyphicon-thumbs-up"></span></a>
+                        <bt/>
+                    {% endfor %}
 
-            <p><a class="btn btn-default" href="#" role="button"> View details &raquo; </a></p>
-        </div>
-    {% endfor %}
+                </p>
+
+                <p><a class="btn btn-default" href="#" role="button"> View details &raquo; </a></p>
+
+            </div>
+        {% endfor %}
     {% endif %}
 {% endblock %}

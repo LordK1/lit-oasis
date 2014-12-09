@@ -16,9 +16,26 @@
 
                 <p>Authors :
                     {% for author in article.author.all %}
-                        {{ author }} -
-                        <a href="#" class="btn btn-primary btn-xs">Likes - {{ author.likes }} <span class="glyphicon glyphicon-thumbs-up"></span></a>
-                        <bt/>
+                        {{ author }}
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <div class="input-group number-spinner">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-danger" data-dir="dwn"><span
+                                                class="glyphicon glyphicon-minus"></span></button>
+                                    </span>
+                                    <input type="text" class="form-control text-center" value="{{ author.likes }}">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary" data-dir="up"><span
+                                                class="glyphicon glyphicon-plus"></span></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% comment %}
+                        <a href="#" class="btn btn-primary btn-xs">Likes - {{ author.likes }} <span
+                                class="glyphicon glyphicon-thumbs-up"></span></a>
+                        <bt/>{% endcomment %}
                     {% endfor %}
 
                 </p>

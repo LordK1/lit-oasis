@@ -3,6 +3,9 @@
 {% block title %}
     Home
 {% endblock %}
+{% block JQUERY %}
+    $authorVoteCount = 3 ;
+{% endblock %}
 {% block header-block %}
     <!-- List of Articles that were in the Headers Category -->
     {% if articles %}
@@ -17,31 +20,28 @@
                 <p>Authors :
                     {% for author in article.author.all %}
                         {{ author }}
-                        <div class="row">
-                            <div class="col-sm-8 col-sm-offset-2">
-                                <div class="input-group number-spinner">
+                        <form method="post" action="{% url 'vote' author.id %}">
+                            {% csrf_token %}
+                            <div class="row vote-bar">
+                                <div class="col-sm-8 col-sm-offset-2">
+                                    <div class="input-group number-spinner">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-danger" data-dir="dwn"><span
-                                                class="glyphicon glyphicon-minus"></span></button>
+                                        <button class="btn btn-danger" data-dir="dwn">
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </button>
                                     </span>
-                                    <input type="text" class="form-control text-center" value="{{ author.likes }}">
+                                        <input type="text" class="form-control text-center" value="{{ author.likes }}">
                                     <span class="input-group-btn">
                                         <button class="btn btn-primary" data-dir="up"><span
                                                 class="glyphicon glyphicon-plus"></span></button>
                                     </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {% comment %}
-                        <a href="#" class="btn btn-primary btn-xs">Likes - {{ author.likes }} <span
-                                class="glyphicon glyphicon-thumbs-up"></span></a>
-                        <bt/>{% endcomment %}
+                        </form>
                     {% endfor %}
-
                 </p>
-
                 <p><a class="btn btn-default" href="#" role="button"> View details &raquo; </a></p>
-
             </div>
         {% endfor %}
     {% endif %}
